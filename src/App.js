@@ -1,10 +1,12 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import AllTheBooks from "./Mycomponents/AllTheBooks";
-import MyFooter from "./Mycomponents/MyFooter";
+import AllTheBooks from "./components/AllTheBooks";
+import Booklist from "./components/Booklist";
+import MyFooter from "./components/MyFooter";
 
-import MyNav from "./Mycomponents/MyNav";
-import Welcome from "./Mycomponents/Welcome";
+import MyNav from "./components/MyNav";
+import Welcome from "./components/Welcome";
+import books from "./data/scifi.json";
 
 function App() {
   return (
@@ -13,7 +15,10 @@ function App() {
         <MyNav home="Home" about="About" browse="Browse" />
       </header>
       <Welcome />
-      <AllTheBooks />
+      {/* <AllTheBooks /> */}
+
+      <Booklist category={books} />
+
       <MyFooter
         aboutUs="About us"
         jobs="Jobs"
