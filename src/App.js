@@ -1,8 +1,8 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import AllTheBooks from "./components/AllTheBooks";
-import Booklist from "./components/Booklist";
 import MyFooter from "./components/MyFooter";
+import MyMain from "./components/MyMain";
 
 import MyNav from "./components/MyNav";
 import Welcome from "./components/Welcome";
@@ -17,7 +17,7 @@ function App() {
       <Welcome />
       {/* <AllTheBooks /> */}
 
-      <Booklist category={books} />
+      <MyMain category={books} />
 
       <MyFooter
         aboutUs="About us"

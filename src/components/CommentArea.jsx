@@ -7,11 +7,12 @@ class CommentArea extends Component {
   state = {
     bookComment: [],
     bookId: this.props.asin,
+    refresh: 0,
   };
 
-  fetchBookComment = async () => {
+  fetchBookComment = async (bookId) => {
     const response = await fetch(
-      `https://striveschool-api.herokuapp.com/api/comments/${this.state.bookId}`,
+      `https://striveschool-api.herokuapp.com/api/comments/${bookId}`,
       {
         headers: {
           Authorization:
@@ -22,23 +23,32 @@ class CommentArea extends Component {
 
     if (response.ok) {
       const bookData = await response.json();
-      console.log(this.props.asin);
+
       this.setState({ bookComment: bookData });
-      console.log("librooooooo", this.state.bookComment);
     } else {
       alert("errore");
     }
   };
 
+  refresh = (asin) => {
+    this.setState({ ...this.state, refresh: asin });
+  };
+
   componentDidMount() {
-    this.fetchBookComment();
+    this.state.bookId && this.fetchBookComment();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.asin !== this.props.asin) {
+      this.fetchBookComment(this.props.asin);
+    }
   }
 
   render() {
     return (
       <>
         <CommentList comments={this.state.bookComment} />
-        <AddComment bookId={this.props.asin} />;
+        <AddComment bookId={this.props.asin} refresh={this.refresh} />;
       </>
     );
   }

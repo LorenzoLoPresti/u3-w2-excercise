@@ -14,7 +14,8 @@ class SingleBook extends Component {
           style={{
             width: "18rem",
             borderRadius: "20px",
-            border: this.state.selected ? "2px solid red" : "",
+            border:
+              this.props.asin === this.props.bookAsin ? "2px solid red" : "",
           }}
           className="shadow-lg"
         >
@@ -26,7 +27,10 @@ class SingleBook extends Component {
               borderTopRightRadius: "20px",
               borderTopLeftRadius: "20px",
             }}
-            onClick={() => this.setState({ selected: !this.state.selected })}
+            // onClick={() => this.setState({ selected: !this.state.selected })}
+            onClick={() => {
+              this.props.asinSelector(this.props.asin, !this.props.selected);
+            }}
           />
           <Card.Body
             className="w-100"
@@ -40,7 +44,7 @@ class SingleBook extends Component {
             <Card.Title className="mb-5">{this.props.element.title}</Card.Title>
           </Card.Body>
         </Card>
-        {this.state.selected && <CommentArea asin={this.props.asin} />}
+        {/* {this.state.selected && <CommentArea asin={this.props.asin} />} */}
       </Col>
     );
   }

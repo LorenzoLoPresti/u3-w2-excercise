@@ -30,7 +30,9 @@ class AddComment extends Component {
       }
     );
     if (response.ok) {
-      alert("dati salvati");
+      let resJason = await response.json();
+      console.log(resJason);
+      this.props.refresh(resJason.elementId);
     } else {
       console.log(response);
       alert("errore", response);
