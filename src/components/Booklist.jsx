@@ -14,7 +14,7 @@ const Booklist = (props) => {
 
   const [researchValue, setResearchValue] = useState("");
   const [research, setResearch] = useState(props.category);
-  const [asin, setAsin] = useState("");
+  // const [asin, setAsin] = useState("");
   const [selected, setSelected] = useState(false);
   const [bookAsin, setBookAsin] = useState(null);
 
@@ -64,6 +64,7 @@ const Booklist = (props) => {
               })
               .map((elem, index) => {
                 // this.setState({ ...this.state, asin: elem.asin });
+
                 return (
                   <SingleBook
                     element={elem}

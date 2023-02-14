@@ -11,7 +11,7 @@ function AllTheBooks() {
               <Col className="mb-4">
                 <Card
                   style={{ width: "18rem", borderRadius: "20px" }}
-                  key={index}
+                  key={{ index }}
                   className="shadow-lg"
                 >
                   <Card.Img
