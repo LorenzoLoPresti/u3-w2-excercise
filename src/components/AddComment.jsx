@@ -88,6 +88,3 @@ const AddComment = (props) => {
 };
 
 export default AddComment;
-
-// https/token&s=harrypotter&y=2001
-// usare postman //%20 spazio su fetch

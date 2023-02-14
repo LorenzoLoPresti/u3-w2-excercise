@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Col, Card } from "react-bootstrap";
-import CommentArea from "./CommentArea";
 
 const SingleBook = (props) => {
   // state = {
