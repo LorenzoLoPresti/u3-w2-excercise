@@ -1,16 +1,20 @@
-import { Component } from "react";
+import { useState, useEffect } from "react";
 
 import AddComment from "./AddComment";
 import CommentList from "./CommentList";
 
-class CommentArea extends Component {
-  state = {
-    bookComment: [],
-    bookId: this.props.asin,
-    refresh: 0,
-  };
+const CommentArea = (props) => {
+  // state = {
+  //   bookComment: [],
+  //   bookId: this.props.asin,
+  //   refresh: 0,
+  // };
 
-  fetchBookComment = async (bookId) => {
+  const [bookComment, setBookComment] = useState([]);
+  const [bookId, useBookId] = useState(props.asin);
+  const [refresh, setRefresh] = useState(0);
+
+  const fetchBookComment = async (bookId) => {
     const response = await fetch(
       `https://striveschool-api.herokuapp.com/api/comments/${bookId}`,
       {
@@ -24,34 +28,40 @@ class CommentArea extends Component {
     if (response.ok) {
       const bookData = await response.json();
 
-      this.setState({ bookComment: bookData });
+      setBookComment({ bookData });
     } else {
       alert("errore");
     }
   };
 
-  refresh = (asin) => {
-    this.setState({ ...this.state, refresh: asin });
+  const refreshFunction = (asin) => {
+    setRefresh({ asin });
   };
 
-  componentDidMount() {
-    this.state.bookId && this.fetchBookComment();
-  }
+  // componentDidMount() {
+  //   bookId && fetchBookComment();
+  // }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.asin !== this.props.asin) {
-      this.fetchBookComment(this.props.asin);
-    }
-  }
+  useEffect(() => {
+    bookId && fetchBookComment();
+  }, []);
 
-  render() {
-    return (
-      <>
-        <CommentList comments={this.state.bookComment} />
-        <AddComment bookId={this.props.asin} refresh={this.refresh} />;
-      </>
-    );
-  }
-}
+  // componentDidUpdate(prevProps) {
+  //   if (prevProps.asin !== this.props.asin) {
+  //     this.fetchBookComment(this.props.asin);
+  //   }
+  // }
+
+  useEffect(() => {
+    fetchBookComment(props.asin);
+  }, props.asin);
+
+  return (
+    <>
+      <CommentList comments={bookComment} />
+      <AddComment bookId={props.asin} refresh={refreshFunction} />;
+    </>
+  );
+};
 
 export default CommentArea;
