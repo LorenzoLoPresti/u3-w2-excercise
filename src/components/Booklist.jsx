@@ -40,7 +40,7 @@ const Booklist = (props) => {
   console.log("booklist render", bookAsin);
   return (
     <>
-      <Col xs={8}>
+      <Col xs={12} md={8}>
         <form className="d-flex justify-content-center mb-5">
           <input
             type="text"
@@ -79,7 +79,9 @@ const Booklist = (props) => {
           </Row>
         </Container>
       </Col>
-      <Col xs={4}>{bookAsin && <CommentArea asin={bookAsin} />}</Col>
+      <Col xs={12} md={4}>
+        {<CommentArea asin={bookAsin} />}
+      </Col>
     </>
   );
 };
